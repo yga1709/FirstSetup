@@ -53,8 +53,6 @@ FishInstall() {
 AppInstall() {
     echo "Vimをインストールします"
     sudo apt install --yes vim
-    sudo apt install --yes openssh-server
-    sudo ufw allow ssh
 
     echo "GnomeShellをインストールします"
     sudo apt install --yes gnome-shell gnome-tweak-tool
@@ -64,6 +62,16 @@ AppInstall() {
 
     echo "ffmpegをインストールします"
     sudo apt install --yes ffmpeg
+}
+
+SshSetup() {
+    yorn "SSHを有効にしますか？ (Y)yes/(N)no"
+    if [ $ret -eq 0 ]; then
+        sudo apt install --yes openssh-server
+        sudo ufw allow ssh
+    else
+        echo "キャンセルしました"
+    fi
 }
 
 PythonSetting() {
@@ -95,7 +103,7 @@ HighDpiSetting() {
 }
 
 MouseScrollSpeed() {
-    echo "マウスのスクロール速度を設定しますか？ (Y)yes/(N)no"
+    yorn "マウスのスクロール速度を設定しますか？ (Y)yes/(N)no"
     if [ $ret -eq 0 ]; then
         wget -P ~/Downloads http://www.nicknorton.net/mousewheel.sh
         chmod u+x ~/Downloads/mousewheel.sh

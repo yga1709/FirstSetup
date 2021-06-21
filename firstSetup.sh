@@ -155,6 +155,8 @@ FishInstall
 
 AppInstall
 
+SshSetup
+
 PythonSetting
 
 HighDpiSetting
